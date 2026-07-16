@@ -3,7 +3,7 @@ __pycache__/
 *.py[codz]
 *$py.class
 
-# Flask stuff
+# Flask
 instance/
 .webassets-cache
 
@@ -16,3 +16,11 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Ruff
+.ruff_cache/

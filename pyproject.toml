@@ -16,3 +16,7 @@ check_untyped_defs = true
 [[tool.mypy.overrides]]
 module = "psycopg2.*"
 ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = "flask_smorest.*"
+ignore_missing_imports = true

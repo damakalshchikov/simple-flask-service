@@ -2,7 +2,7 @@ from flask import Flask, jsonify
 from sqlalchemy import text
 
 from app.config import Config
-from app.extensions import db
+from app.extensions import api, db
 
 
 def create_app(config_class=Config):
@@ -10,8 +10,16 @@ def create_app(config_class=Config):
     app.config.from_object(config_class)
 
     db.init_app(app)
+    api.init_app(app)
 
     from app import models  # noqa: F401
+    from app.resources.projects import blp as projects_blp
+    from app.resources.task_comments import blp as task_comments_blp
+    from app.resources.tasks import blp as tasks_blp
+
+    api.register_blueprint(projects_blp)
+    api.register_blueprint(tasks_blp)
+    api.register_blueprint(task_comments_blp)
 
     @app.route("/health")
     def health():

@@ -53,7 +53,7 @@ curl -X POST http://localhost:5001/projects/ \
 
 ## Модель данных
 
-`Project` → `Task` → `TaskComment` с каскадным удалением. У задачи есть
+`Project` -> `Task` -> `TaskComment` с каскадным удалением. У задачи есть
 `status` (`todo` / `in_progress` / `done`), `priority` (`low` / `medium` /
 `high`), необязательные `assignee` и `due_date`.
 
@@ -94,15 +94,17 @@ Docker-образ вместо этого ставит её из локальн�
 
 | Что | Где |
 |---|---|
-| Дашборд Grafana (понятный человеку вид) | <http://localhost:3000/d/flask-svc-metrics> - вход не требуется |
+| Дашборд Grafana | <http://localhost:3000/d/flask-svc-metrics> - вход не требуется |
 | Сырой текстовый формат Prometheus | <http://localhost:5001/metrics> |
-| Prometheus UI (произвольные запросы) | <http://localhost:9090> |
+| Prometheus UI | <http://localhost:9090> |
 | JSONL-лог | `docker compose exec app tail /tmp/metrics.jsonl` |
 
 На дашборде: RPS, латентность p95, коды ответов и исключения по endpoint'ам,
 частота и длительность SQL по операциям, функции под `@measure`, метрики
 процесса (CPU, RSS, потоки, GC); обновление каждые 5 секунд. Prometheus
-опрашивает приложение раз в 5 секунд. Чтобы графики ожили, подайте нагрузку:
+опрашивает приложение раз в 5 секунд. 
+
+Подать нагрузку можно:
 
 ```bash
 for i in $(seq 1 500); do curl -s -o /dev/null http://localhost:5001/projects/; done

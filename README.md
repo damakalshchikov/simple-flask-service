@@ -53,7 +53,7 @@ curl -X POST http://localhost:5001/projects/ \
 
 ## Data model
 
-`Project` → `Task` → `TaskComment` with cascade deletion. A task has a
+`Project` -> `Task` -> `TaskComment` with cascade deletion. A task has a
 `status` (`todo` / `in_progress` / `done`), a `priority` (`low` / `medium` /
 `high`), an optional `assignee` and a `due_date`.
 
@@ -95,16 +95,17 @@ repository), copy it into `wheels/` and update the file name in
 
 | What | Where |
 |---|---|
-| Grafana dashboard (the human-friendly view) | <http://localhost:3000/d/flask-svc-metrics> - no login required |
+| Grafana dashboard | <http://localhost:3000/d/flask-svc-metrics> - no login required |
 | Raw Prometheus text format | <http://localhost:5001/metrics> |
-| Prometheus UI (ad-hoc queries) | <http://localhost:9090> |
+| Prometheus UI | <http://localhost:9090> |
 | JSONL log dump | `docker compose exec app tail /tmp/metrics.jsonl` |
 
 The dashboard shows HTTP RPS, p95 latency, response codes and exceptions per
 endpoint, SQL rate and duration per operation, `@measure`-instrumented
 functions, and process metrics (CPU, RSS, threads, GC), refreshing every 5
-seconds. Prometheus scrapes the app every 5 seconds. To see the graphs move,
-generate some load:
+seconds. Prometheus scrapes the app every 5 seconds.
+
+You can generate load like this:
 
 ```bash
 for i in $(seq 1 500); do curl -s -o /dev/null http://localhost:5001/projects/; done

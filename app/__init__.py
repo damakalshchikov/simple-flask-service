@@ -2,7 +2,7 @@ from flask import Flask, jsonify
 from sqlalchemy import text
 
 from app.config import Config
-from app.extensions import api, db
+from app.extensions import api, db, metrics
 
 
 def create_app(config_class=Config):
@@ -11,6 +11,7 @@ def create_app(config_class=Config):
 
     db.init_app(app)
     api.init_app(app)
+    metrics.init_app(app)
 
     from app import models  # noqa: F401
     from app.resources.projects import blp as projects_blp

@@ -14,3 +14,8 @@ class Config:
     OPENAPI_URL_PREFIX = "/api/docs"
     OPENAPI_SWAGGER_UI_PATH = "/swagger-ui"
     OPENAPI_SWAGGER_UI_URL = "https://cdn.jsdelivr.net/npm/swagger-ui-dist/"
+
+    METRICS_NAMESPACE = "taskservice"
+    METRICS_EXCLUDE_PATHS = ["/metrics", "/health", "/health/db"]
+    METRICS_LOG_FILE = os.environ.get("METRICS_LOG_FILE")
+    METRICS_LOG_INTERVAL = float(os.environ.get("METRICS_LOG_INTERVAL", "60"))

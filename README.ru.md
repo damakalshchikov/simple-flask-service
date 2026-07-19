@@ -53,6 +53,6 @@ curl -X POST http://localhost:5001/projects/ \
 
 ## Модель данных
 
-`Project` → `Task` → `TaskComment` с каскадным удалением. У задачи есть
+`Project` -> `Task` -> `TaskComment` с каскадным удалением. У задачи есть
 `status` (`todo` / `in_progress` / `done`), `priority` (`low` / `medium` /
 `high`), необязательные `assignee` и `due_date`.

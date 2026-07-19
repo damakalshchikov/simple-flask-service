@@ -53,6 +53,6 @@ curl -X POST http://localhost:5001/projects/ \
 
 ## Data model
 
-`Project` → `Task` → `TaskComment` with cascade deletion. A task has a
+`Project` -> `Task` -> `TaskComment` with cascade deletion. A task has a
 `status` (`todo` / `in_progress` / `done`), a `priority` (`low` / `medium` /
 `high`), an optional `assignee` and a `due_date`.

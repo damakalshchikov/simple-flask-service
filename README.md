@@ -81,21 +81,21 @@ repository), copy it into `wheels/` and update the file name in
 
 ### How it is wired into the app
 
-- `app/extensions.py` — `metrics = FlaskMetrics()`; initialized in the app
+- `app/extensions.py` - `metrics = FlaskMetrics()`; initialized in the app
   factory via `metrics.init_app(app)`. HTTP metrics need nothing else:
   they are collected by request hooks.
-- `app/config.py` — `METRICS_NAMESPACE = "taskservice"`; `/metrics` and the
+- `app/config.py` - `METRICS_NAMESPACE = "taskservice"`; `/metrics` and the
   health endpoints are excluded from HTTP metrics; `METRICS_LOG_FILE` /
   `METRICS_LOG_INTERVAL` come from environment variables (docker-compose sets
   a JSONL dump to `/tmp/metrics.jsonl` every 30 s).
-- `app/resources/common.py` — the `@measure` decorator on `get_or_404` as an
+- `app/resources/common.py` - the `@measure` decorator on `get_or_404` as an
   example of method-level metrics.
 
 ### Where to look at the metrics
 
 | What | Where |
 |---|---|
-| Grafana dashboard (the human-friendly view) | <http://localhost:3000/d/flask-svc-metrics> — no login required |
+| Grafana dashboard (the human-friendly view) | <http://localhost:3000/d/flask-svc-metrics> - no login required |
 | Raw Prometheus text format | <http://localhost:5001/metrics> |
 | Prometheus UI (ad-hoc queries) | <http://localhost:9090> |
 | JSONL log dump | `docker compose exec app tail /tmp/metrics.jsonl` |

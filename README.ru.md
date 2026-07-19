@@ -74,27 +74,27 @@ pip install -i https://test.pypi.org/simple/ --extra-index-url https://pypi.org/
 
 Docker-образ вместо этого ставит её из локального wheel
 (`wheels/flask_service_metrics-0.1.1-py3-none-any.whl`, подключён строкой в
-`requirements.txt`) — сборка не зависит от внешнего индекса. После изменения
+`requirements.txt`) - сборка не зависит от внешнего индекса. После изменения
 библиотеки: пересобрать wheel (`python -m build` в её репозитории),
 скопировать в `wheels/` и обновить имя файла в `requirements.txt`.
 
 ### Как подключено в приложении
 
-- `app/extensions.py` — `metrics = FlaskMetrics()`; инициализация в фабрике
+- `app/extensions.py` - `metrics = FlaskMetrics()`; инициализация в фабрике
   через `metrics.init_app(app)`. Для HTTP-метрик больше ничего не нужно:
   они собираются хуками запросов.
-- `app/config.py` — `METRICS_NAMESPACE = "taskservice"`; `/metrics` и
+- `app/config.py` - `METRICS_NAMESPACE = "taskservice"`; `/metrics` и
   health-endpoint'ы исключены из HTTP-метрик; `METRICS_LOG_FILE` /
   `METRICS_LOG_INTERVAL` берутся из переменных окружения (docker-compose
   настраивает JSONL-дамп в `/tmp/metrics.jsonl` каждые 30 с).
-- `app/resources/common.py` — декоратор `@measure` на `get_or_404` как пример
+- `app/resources/common.py` - декоратор `@measure` на `get_or_404` как пример
   метрик уровня метода.
 
 ### Где смотреть метрики
 
 | Что | Где |
 |---|---|
-| Дашборд Grafana (понятный человеку вид) | <http://localhost:3000/d/flask-svc-metrics> — вход не требуется |
+| Дашборд Grafana (понятный человеку вид) | <http://localhost:3000/d/flask-svc-metrics> - вход не требуется |
 | Сырой текстовый формат Prometheus | <http://localhost:5001/metrics> |
 | Prometheus UI (произвольные запросы) | <http://localhost:9090> |
 | JSONL-лог | `docker compose exec app tail /tmp/metrics.jsonl` |

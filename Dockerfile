@@ -5,6 +5,7 @@ RUN python -m venv /opt/venv
 ENV PATH="/opt/venv/bin:$PATH"
 WORKDIR /app
 COPY requirements.txt .
+COPY wheels/ wheels/
 RUN pip install --no-cache-dir -r requirements.txt
 
 FROM python:3.14-slim

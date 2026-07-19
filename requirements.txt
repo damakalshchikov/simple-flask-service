@@ -16,3 +16,4 @@ SQLAlchemy==2.0.51
 typing_extensions==4.16.0
 webargs==8.7.1
 Werkzeug==3.1.8
+wheels/flask_service_metrics-0.1.1-py3-none-any.whl

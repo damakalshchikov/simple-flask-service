@@ -18,6 +18,8 @@ services:
     build: .
     environment:
       DATABASE_URL: postgresql+psycopg2://postgres:postgres@db:5432/simple-database
+      METRICS_LOG_FILE: /tmp/metrics.jsonl
+      METRICS_LOG_INTERVAL: "30"
     ports:
       - "5001:5000"
     depends_on:
